@@ -14,38 +14,38 @@ public var errStream = StderrOutputStream()
 
 let L = Int(readLine()!)!
 let H = Int(readLine()!)!
-let T = readLine()!.uppercased() // <-- Little manipulation here
+let T = readLine()!.uppercased()
 
+var result = ""
 var rows = [String]()
 if H > 0 {
     for i in 0...(H - 1) {
         let ROW = readLine()!
         rows.append(ROW)
     }
+
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ?"
+    var reference = ""
+    for item in alphabet {
+        reference += String(repeating: item, count: L)
+    }
+
+    for row in rows {
+        var resultRow = ""
+
+        for character in T {
+            if let start = reference.firstIndex(of: character) ?? reference.firstIndex(of: "?"),
+               let end = reference.lastIndex(of: character) ?? reference.lastIndex(of: "?")
+            {
+                resultRow += row[start...end]
+            }
+        }
+
+        result += "\(resultRow)\n"
+    }
 }
 
 // Write an answer using print("message...")
 // To debug: print("Debug messages...", to: &errStream)
-
-let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ?"
-var reference = ""
-for item in alphabet {
-    reference += String(repeating: item, count: L)
-}
-
-var result = ""
-for row in rows {
-    var resultRow = ""
-
-    for character in T {
-        if let start = reference.firstIndex(of: character) ?? reference.firstIndex(of: "?"),
-           let end = reference.lastIndex(of: character) ?? reference.lastIndex(of: "?")
-        {
-            resultRow += row[start...end]
-        }
-    }
-
-    result += "\(resultRow)\n"
-}
 
 print(result)
