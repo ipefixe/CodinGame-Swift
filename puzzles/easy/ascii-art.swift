@@ -35,8 +35,7 @@ if H > 0 {
 
         for character in T {
             if let start = reference.firstIndex(of: character) ?? reference.firstIndex(of: "?"),
-               let end = reference.lastIndex(of: character) ?? reference.lastIndex(of: "?")
-            {
+               let end = reference.lastIndex(of: character) ?? reference.lastIndex(of: "?") {
                 resultRow += row[start...end]
             }
         }
